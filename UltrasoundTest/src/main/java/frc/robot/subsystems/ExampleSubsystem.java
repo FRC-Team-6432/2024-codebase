@@ -15,7 +15,6 @@ public class ExampleSubsystem extends SubsystemBase {
   public AnalogPotentiometer sensor;
   public ExampleSubsystem() {
     sensor = new AnalogPotentiometer(0, 1);
-
   }
 
   /**

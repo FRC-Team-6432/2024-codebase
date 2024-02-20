@@ -18,9 +18,10 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 public class ExampleSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   public AnalogPotentiometer sensor;
+  public NetworkTable table;
   public ExampleSubsystem() {
     sensor = new AnalogPotentiometer(0, 1);
-    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    table = NetworkTableInstance.getDefault().getTable("limelight");
   
   }
 
