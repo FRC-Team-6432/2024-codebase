@@ -17,12 +17,18 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class ExampleSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  public AnalogPotentiometer sensor;
+
+  // CONSTANTS
+  final double limelightMountHeight = 1270;
+  final double armBaseHeight = 1270;
+  final double armLength = 582;
+
+  final double limelightMountAngleDeg = 90 - Math.toDegrees(Math.atan(37/54));
+  final double shooterAngleToArmDeg = 110;
+
   public NetworkTable table;
   public ExampleSubsystem() {
-    sensor = new AnalogPotentiometer(0, 1);
     table = NetworkTableInstance.getDefault().getTable("limelight");
-  
   }
 
   /**
@@ -55,17 +61,33 @@ public class ExampleSubsystem extends SubsystemBase {
     //read values periodically
     NetworkTableEntry tx = table.getEntry("tx");
     NetworkTableEntry ty = table.getEntry("ty");
-    NetworkTableEntry ta = table.getEntry("ta");
 
     double x = tx.getDouble(0.0);
     double y = ty.getDouble(0.0);
-    double area = ta.getDouble(0.0);
+    
+    double tagHeight = 1367;
+
+    double heightFromLimelight = tagHeight-limelightMountHeight;
+    double heightFromArmBase = tagHeight - armBaseHeight;
+
+    double angleFromLimelight = limelightMountAngleDeg + y;
+    
+    double horizontalDistance = heightFromLimelight / Math.tan(Math.toRadians(angleFromLimelight));
+
+    double armBaseTargetDistance = Math.sqrt(heightFromArmBase*heightFromArmBase + horizontalDistance*horizontalDistance);
+    double angleFromArmBase = Math.toDegrees(Math.atan(heightFromArmBase/horizontalDistance));
+
+    // double limelightTargetDistance = heightFromLimelight / Math.sin(Math.toRadians(angleFromLimelight));
+
+    double theta = Math.toDegrees(Math.asin((armLength*Math.sin(Math.toRadians(180-shooterAngleToArmDeg)))/armBaseTargetDistance));
+
+    double armAngle = 180 - angleFromArmBase + theta - shooterAngleToArmDeg;
 
 //post to smart dashboard periodically
     SmartDashboard.putNumber("LimelightX", x);
     SmartDashboard.putNumber("LimelightY", y);
-    SmartDashboard.putNumber("LimelightArea", area);
-  
+    SmartDashboard.putNumber("Arm Angle", armAngle);
+
   }
 
   @Override
