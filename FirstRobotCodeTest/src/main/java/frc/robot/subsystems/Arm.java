@@ -4,7 +4,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.networktables.NetworkTable;
@@ -12,20 +11,31 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import com.ctre.phoenix.CANifier.PWMChannel;
+import com.revrobotics.AbsoluteEncoder;
+import com.revrobotics.SparkMaxAlternateEncoder;
+import com.revrobotics.SparkPIDController;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.CANSparkMax;
 
 
 public class Arm extends SubsystemBase {
-  DutyCycleEncoder armEncoder = new DutyCycleEncoder(4);
-  TalonFX armMotor = new TalonFX(8);
   NetworkTable table;
   Rotation2d angleChange = new Rotation2d(0);
-
+  CANSparkMax armMotor1 =new CANSparkMax(8, MotorType.kBrushed);
+  CANSparkMax armMotor2 =new CANSparkMax(9, MotorType.kBrushed);
+  AbsoluteEncoder armEncoder;
+  
   /** Creates a new Arm. */
   public Arm() {
     table = NetworkTableInstance.getDefault().getTable("limelight");
-    double AbsPos = armEncoder.getAbsolutePosition() - angleChange.getRotations(); //You might want the encoder's absolute position to be negative
-    armMotor.setPosition(AbsPos);
+    armMotor2.follow(armMotor1);
+    armMotor2.setInverted(true);
+    armEncoder = armMotor1.getAbsoluteEncoder();
+    double AbsPos = armEncoder.getPosition() - angleChange.getRotations(); //You might want the encoder's absolute position to be negative
   }
 
   @Override
@@ -39,15 +49,12 @@ public class Arm extends SubsystemBase {
       double targetOffsetAngle_Vertical = ty.getDouble(0.0);
       double limelightMountAngleDegrees = 25.0; 
       double angleToGoalDegrees = limelightMountAngleDegrees + targetOffsetAngle_Vertical;
-      armMotor.setPosition(angleToGoalDegrees);
     }
   }
   public void angleArmAmp(XboxController controller){
     //IF
-    armMotor.setPosition(90);
   }
   public void intakeNote(XboxController controller){
     //IF
-    armMotor.setPosition(0);
   }
 }
