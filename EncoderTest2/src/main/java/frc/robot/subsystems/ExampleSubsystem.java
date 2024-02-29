@@ -4,12 +4,22 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+
+import edu.wpi.first.wpilibj.drive.RobotDriveBase.MotorType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ExampleSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  public ExampleSubsystem() {}
+  CANSparkMax armMotor1 =new CANSparkMax(1, com.revrobotics.CANSparkLowLevel.MotorType.kBrushed);
+  // AbsoluteEncoder armEncoder;
+
+  public ExampleSubsystem() {
+    // armEncoder = armMotor1.getAbsoluteEncoder();
+
+  }
 
   /**
    * Example command factory method.
@@ -38,6 +48,8 @@ public class ExampleSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  double AbsPos = armMotor1.getAbsoluteEncoder().getPosition();
+  SmartDashboard.putNumber("encoder", AbsPos);
   }
 
   @Override
