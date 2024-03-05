@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
@@ -19,6 +20,8 @@ public class ExampleSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   DutyCycleEncoder encoder = new DutyCycleEncoder(4);
   CANSparkMax motor = new CANSparkMax(1, MotorType.kBrushed);
+  // WPI_TalonSRX motorTalon = new WPI_TalonSRX(2);
+  // WPI_TalonSRX motorTalon2 = new WPI_TalonSRX(3);
 
   boolean xWasPressed = false;
   boolean yWasPressed = false;
@@ -82,7 +85,8 @@ public class ExampleSubsystem extends SubsystemBase {
     }
 
     double absPos = encoder.getAbsolutePosition();
-    motor.set(5*pidController.calculate(encoder.getDistance(), position));
+    motor.set(pidController.calculate(encoder.getDistance(), position));
+    // motorTalon.set(pidController.calculate(encoder.getDistance(), position));
 
     if (!aWasPressed && xbox.getAButtonPressed()) {
       values[current_value] -= delta_k;
