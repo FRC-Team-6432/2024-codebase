@@ -19,8 +19,8 @@ public class ArmUpdated extends SubsystemBase {
 
   final double OFFSET_ENCODER = 0; // Encoder value when arm is at 0 deg to horizontal
 
-  CANSparkMax motorLeft = new CANSparkMax(LEFT_MOTOR_ID, MotorType.kBrushed);
-  CANSparkMax motorRight = new CANSparkMax(RIGHT_MOTOR_ID, MotorType.kBrushed);
+  WPI_TalonSRX motorLeft = new WPI_TalonSRX(LEFT_MOTOR_ID, MotorType.kBrushed);
+  WPI_TalonSRX motorRight = new WPI_TalonSRX(RIGHT_MOTOR_ID, MotorType.kBrushed);
 
   DutyCycleEncoder boreEncoder = new DutyCycleEncoder(ENCODER_CHANNEL);
 
