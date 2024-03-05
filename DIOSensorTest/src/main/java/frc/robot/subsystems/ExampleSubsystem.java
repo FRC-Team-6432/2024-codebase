@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ExampleSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
+  DigitalInput input = new DigitalInput(0);
   public ExampleSubsystem() {}
 
   /**
@@ -38,6 +39,8 @@ public class ExampleSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Output: ", input.get());
+    
   }
 
   @Override
