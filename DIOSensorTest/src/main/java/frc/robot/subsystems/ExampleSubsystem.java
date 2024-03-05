@@ -6,18 +6,10 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
-import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ExampleSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  public AnalogInput sensor;
-  public ExampleSubsystem() {
-    sensor = new AnalogInput(0);
-
-  }
+  public ExampleSubsystem() {}
 
   /**
    * Example command factory method.
@@ -46,13 +38,6 @@ public class ExampleSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    Double vsf = 5/RobotController.getVoltage5V();
-
-    Double no = sensor.getValue()*vsf*0.125;
-    String str = no.toString();
-  
-    SmartDashboard.putString("Distance", str);
-  
   }
 
   @Override

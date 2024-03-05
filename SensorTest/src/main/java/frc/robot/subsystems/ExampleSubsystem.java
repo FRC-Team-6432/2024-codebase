@@ -4,19 +4,26 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+
+import com.revrobotics.ColorSensorV3;
 
 public class ExampleSubsystem extends SubsystemBase {
-  /** Creates a new ExampleSubsystem. */
-  public AnalogInput sensor;
-  public ExampleSubsystem() {
-    sensor = new AnalogInput(0);
+  public ColorSensorV3 colourSensor;
+  private final I2C.Port i2cPort = I2C.Port.kOnboard;
 
+  public AnalogInput ultrasonicSensor;
+
+  /** Creates a new ExampleSubsystem. */
+  public ExampleSubsystem() {
+    colourSensor = new ColorSensorV3(i2cPort);
+    ultrasonicSensor = new AnalogInput(0);
   }
 
   /**
@@ -48,11 +55,14 @@ public class ExampleSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
     Double vsf = 5/RobotController.getVoltage5V();
 
-    Double no = sensor.getValue()*vsf*0.125;
-    String str = no.toString();
+    Double ultrasonicValue = ultrasonicSensor.getValue()*vsf*0.125;
   
-    SmartDashboard.putString("Distance", str);
+    SmartDashboard.putString("Distance", ultrasonicValue.toString());
+
+    Integer colorValue = colourSensor.getRed();
   
+    SmartDashboard.putString("Colour", colorValue.toString());
+
   }
 
   @Override
