@@ -34,6 +34,7 @@ public class RobotContainer {
     private final Swerve s_Swerve = new Swerve();
     private final Arm arm = new Arm(); 
     private final Intake intake = new Intake(); //set default command when its made
+    private final ArmUpdated armUpdated = new ArmUpdated();
 
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -47,7 +48,6 @@ public class RobotContainer {
                 () -> robotCentric.getAsBoolean()
             )
         );
-
 
         // Configure the button bindings
         configureButtonBindings();
