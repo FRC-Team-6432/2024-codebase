@@ -4,6 +4,12 @@
 
 package frc.robot.subsystems;
 
+<<<<<<< HEAD
+=======
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+>>>>>>> 9dff2868b34f4e720c6e23a27bafb1635cd6da47
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
@@ -21,8 +27,13 @@ public class ArmUpdated extends SubsystemBase {
 
   final double OFFSET_ENCODER = 0; // Encoder value when arm is at 0 deg to horizontal
 
+<<<<<<< HEAD
   TalonSRX motorLeft = new TalonSRX(LEFT_MOTOR_ID);
   TalonSRX motorRight = new TalonSRX(RIGHT_MOTOR_ID);
+=======
+  WPI_TalonSRX motorLeft = new WPI_TalonSRX(LEFT_MOTOR_ID);
+  WPI_TalonSRX motorRight = new WPI_TalonSRX(RIGHT_MOTOR_ID);
+>>>>>>> 9dff2868b34f4e720c6e23a27bafb1635cd6da47
 
   DutyCycleEncoder boreEncoder = new DutyCycleEncoder(ENCODER_CHANNEL);
 
