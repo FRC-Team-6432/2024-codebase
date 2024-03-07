@@ -19,7 +19,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class ExampleSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   DutyCycleEncoder encoder = new DutyCycleEncoder(4);
-  CANSparkMax motor = new CANSparkMax(1, MotorType.kBrushed);
+  WPI_TalonSRX motorLeft = new WPI_TalonSRX(1);
+  WPI_TalonSRX motorRight = new WPI_TalonSRX(2);
   // WPI_TalonSRX motorTalon = new WPI_TalonSRX(2);
   // WPI_TalonSRX motorTalon2 = new WPI_TalonSRX(3);
 
@@ -46,6 +47,7 @@ public class ExampleSubsystem extends SubsystemBase {
   double position = 0;
 
   public ExampleSubsystem() {
+    
   }
 
   /**
