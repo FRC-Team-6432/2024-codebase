@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ExampleSubsystem extends SubsystemBase {
   final double INTAKE_ENCODER_VALUE = 0.143;
-  final double MAX_ENCODER_VALUE = 0.46;
+  final double MAX_ENCODER_VALUE = INTAKE_ENCODER_VALUE+0.25;
   /** Creates a new ExampleSubsystem. */
   DutyCycleEncoder encoder = new DutyCycleEncoder(3);
   WPI_TalonSRX motorLeft = new WPI_TalonSRX(2);
@@ -46,10 +46,10 @@ public class ExampleSubsystem extends SubsystemBase {
 
   PIDController pidController = new PIDController(kp, ki, kd);
 
-  double position = 0;
+  double position = INTAKE_ENCODER_VALUE;
 
   public ExampleSubsystem() {
-    motorLeft.setInverted(true);
+    motorRight.setInverted(true);
     motorLeft.follow(motorRight);
   }
 
@@ -81,12 +81,18 @@ public class ExampleSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     if (xbox.getRightTriggerAxis() > 0.9 ) {
-      position += 0.01;
+      position += 0.001;
       if (position > MAX_ENCODER_VALUE) {position = MAX_ENCODER_VALUE;}
     }
     else if (xbox.getLeftTriggerAxis() > 0.9) {
-      position -= 0.01;
+      position -= 0.001;
       if (position < INTAKE_ENCODER_VALUE) {position = INTAKE_ENCODER_VALUE;}
+    }
+    if (xbox.getLeftBumperPressed()) {
+      position = INTAKE_ENCODER_VALUE;
+    }
+    else if (xbox.getRightBumperPressed()) {
+      position = MAX_ENCODER_VALUE;
     }
 
     double absPos = encoder.getAbsolutePosition();
