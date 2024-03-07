@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ExampleSubsystem extends SubsystemBase {
+  final double INTAKE_ENCODER_VALUE = 0.143;
+  final double MAX_ENCODER_VALUE = 0.46;
   /** Creates a new ExampleSubsystem. */
   DutyCycleEncoder encoder = new DutyCycleEncoder(4);
   WPI_TalonSRX motorLeft = new WPI_TalonSRX(2);
@@ -80,11 +82,11 @@ public class ExampleSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
     if (xbox.getRightTriggerAxis() > 0.9 ) {
       position += 0.01;
-      if (position > 1) {position = 1;}
+      if (position > MAX_ENCODER_VALUE) {position = MAX_ENCODER_VALUE;}
     }
     else if (xbox.getLeftTriggerAxis() > 0.9) {
       position -= 0.01;
-      if (position < 0) {position = 0;}
+      if (position < INTAKE_ENCODER_VALUE) {position = INTAKE_ENCODER_VALUE;}
     }
 
     double absPos = encoder.getAbsolutePosition();
