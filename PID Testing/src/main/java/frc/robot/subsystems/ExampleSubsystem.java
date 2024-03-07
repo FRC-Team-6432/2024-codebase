@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ExampleSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  DutyCycleEncoder encoder = new DutyCycleEncoder(4);
+  DutyCycleEncoder encoder = new DutyCycleEncoder(3);
   WPI_TalonSRX motorLeft = new WPI_TalonSRX(2);
   WPI_TalonSRX motorRight = new WPI_TalonSRX(1);
   // WPI_TalonSRX motorTalon = new WPI_TalonSRX(2);
