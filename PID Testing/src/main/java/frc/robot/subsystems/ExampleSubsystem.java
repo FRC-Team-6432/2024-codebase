@@ -47,7 +47,8 @@ public class ExampleSubsystem extends SubsystemBase {
   double position = 0;
 
   public ExampleSubsystem() {
-    
+    motorLeft.setInverted(true);
+    motorLeft.follow(motorRight);
   }
 
   /**
@@ -87,7 +88,7 @@ public class ExampleSubsystem extends SubsystemBase {
     }
 
     double absPos = encoder.getAbsolutePosition();
-    motor.set(pidController.calculate(encoder.getDistance(), position));
+    motorRight.set(pidController.calculate(encoder.getDistance(), position));
     // motorTalon.set(pidController.calculate(encoder.getDistance(), position));
 
     if (!aWasPressed && xbox.getAButtonPressed()) {
