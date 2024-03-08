@@ -26,18 +26,11 @@ public class ArmUpdated extends SubsystemBase {
   final int ENCODER_CHANNEL = 0;
 
   final double OFFSET_ENCODER = 0; // Encoder value when arm is at 0 deg to horizontal
-
-<<<<<<< HEAD
-  TalonSRX motorLeft = new TalonSRX(LEFT_MOTOR_ID);
-  TalonSRX motorRight = new TalonSRX(RIGHT_MOTOR_ID);
-=======
   WPI_TalonSRX motorLeft = new WPI_TalonSRX(LEFT_MOTOR_ID);
   WPI_TalonSRX motorRight = new WPI_TalonSRX(RIGHT_MOTOR_ID);
->>>>>>> 9dff2868b34f4e720c6e23a27bafb1635cd6da47
-
   DutyCycleEncoder boreEncoder = new DutyCycleEncoder(ENCODER_CHANNEL);
 
-  double kp = 1;
+  double kp = 8;
   double ki = 0;
   double kd = 0;
 
