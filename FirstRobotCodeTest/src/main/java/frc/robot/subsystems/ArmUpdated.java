@@ -4,14 +4,13 @@
 
 package frc.robot.subsystems;
 
-<<<<<<< HEAD
-=======
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
->>>>>>> 9dff2868b34f4e720c6e23a27bafb1635cd6da47
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -36,8 +35,12 @@ public class ArmUpdated extends SubsystemBase {
 
   PIDController pidController = new PIDController(kp, ki, kd);
 
+  public NetworkTable table;
+
   public ArmUpdated() {
-    motorRight.follow(motorLeft);
+    motorRight.setInverted(true);
+    motorLeft.follow(motorRight);
+    table = NetworkTableInstance.getDefault().getTable("limelight");
   }
 
   public void setArmToAngle(double angleDeg) {
