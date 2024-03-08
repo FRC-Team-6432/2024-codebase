@@ -47,7 +47,7 @@ public class ExampleSubsystem extends SubsystemBase {
   double position = 0;
 
   public ExampleSubsystem() {
-    motorLeft.setInverted(true);
+    motorRight.setInverted(true);
     motorLeft.follow(motorRight);
   }
 
