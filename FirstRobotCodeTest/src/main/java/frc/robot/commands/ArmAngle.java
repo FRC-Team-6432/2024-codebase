@@ -4,28 +4,41 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.ArmUpdated;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.Intake;
 
-public class InNOut extends Command {
-  /** Creates a new InNOut. */
-  Intake intake;
-  public InNOut(Intake intoke) {
+public class ArmAngle extends Command {
+  /** Creates a new ArmAngle. */
+  ArmUpdated arm;
+  XboxController xbox;
+  public ArmAngle(ArmUpdated urm) {
     // Use addRequirements() here to declare subsystem dependencies.
-    intake = intoke;
-    addRequirements(intake);
+    arm = urm;
+    addRequirements(arm);
+
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    arm.setArmToAngle(0);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intake.yoink(RobotContainer.driver);
-    intake.yeet(RobotContainer.driver);
+    arm.climb(RobotContainer.driver);
+    if(RobotContainer.driver.getAButton()){ //AMP
+
+    }
+    else if (RobotContainer.driver.getYButton()){ //SPEAKER
+
+    }
+    else if (RobotContainer.driver.getBButton()){ //FLOOR
+
+    }
   }
 
   // Called once the command ends or is interrupted.
