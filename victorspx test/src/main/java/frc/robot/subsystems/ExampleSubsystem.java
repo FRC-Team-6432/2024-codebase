@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class ExampleSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   public ExampleSubsystem() {}
-  WPI_VictorSPX motor = new WPI_VictorSPX(1);
+  WPI_VictorSPX motor = new WPI_VictorSPX(5);
   /**
    * Example command factory method.
    *
@@ -40,7 +40,7 @@ public class ExampleSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    motor.set(50);
+    motor.set(0.5);
   }
 
   @Override
