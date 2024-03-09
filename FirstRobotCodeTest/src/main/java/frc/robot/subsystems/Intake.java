@@ -39,6 +39,7 @@ public class Intake extends SubsystemBase {
     if (controller.getRightBumper()){
       shooterLeft.set(-1);
       shooterRight.set(1);
+      intakeMotor.set(1);
     }
     else{
       shooterLeft.set(0);
