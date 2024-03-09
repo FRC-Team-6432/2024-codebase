@@ -102,7 +102,7 @@ public class ArmUpdated extends SubsystemBase {
     currentAngle = getAngleToGoal();
   }
   public void setArmToAmp() {
-    currentAngle = MAX_ENCODER_VALUE;
+    currentAngle = 90;
   }
 
   // public void climb(XboxController controller){
@@ -119,6 +119,7 @@ public class ArmUpdated extends SubsystemBase {
     setArmToAngle(currentAngle);
     double absPos = boreEncoder.getAbsolutePosition();
     SmartDashboard.putNumber("encoder position: ", absPos);
+    SmartDashboard.putNumber("position", currentAngle);
     SmartDashboard.putBoolean("A: ", driver.getAButtonPressed());
     SmartDashboard.putBoolean("B: ", driver.getBButtonPressed());
     // SmartDashboard.putNumber("set position", position);
