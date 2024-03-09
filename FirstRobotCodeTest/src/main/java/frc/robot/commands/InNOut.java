@@ -24,8 +24,8 @@ public class InNOut extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intake.yoink(RobotContainer.driver);
-    intake.yeet(RobotContainer.driver);
+    // intake.yoink(RobotContainer.driver);
+    // intake.yeet(RobotContainer.driver);
   }
 
   // Called once the command ends or is interrupted.

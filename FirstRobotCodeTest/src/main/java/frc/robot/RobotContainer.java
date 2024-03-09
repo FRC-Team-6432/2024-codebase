@@ -37,13 +37,16 @@ public class RobotContainer {
     private final ArmUpdated arm = new ArmUpdated(); 
     private final Intake intake = new Intake(); //set default command when its made
 
+    // Commands
     private final ArmAngle angle = new ArmAngle(arm);
     private final InNOut in = new InNOut(intake);
 
-    
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
+        // Configure the button bindings
+        configureButtonBindings();
+        
         s_Swerve.setDefaultCommand(
             new TeleopSwerve(
                 s_Swerve, 
@@ -55,10 +58,6 @@ public class RobotContainer {
         );
         arm.setDefaultCommand(angle);
         intake.setDefaultCommand(in);
-
-
-        // Configure the button bindings
-        configureButtonBindings();
     }
 
     /**
@@ -70,6 +69,8 @@ public class RobotContainer {
     private void configureButtonBindings() {
         /* Driver Buttons */
         // zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
+        driver.a().onTrue(Commands.runOnce(
+            () -> arm.setArmToIntake(), arm));
     }
 
     /**
