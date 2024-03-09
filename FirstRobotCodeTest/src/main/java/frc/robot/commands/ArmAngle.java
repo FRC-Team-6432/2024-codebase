@@ -29,16 +29,16 @@ public class ArmAngle extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    arm.climb(RobotContainer.driver);
-    if(RobotContainer.driver.getAButton()){ //AMP
+    // arm.climb(RobotContainer.driver);
+    // if(RobotContainer.driver.getAButton()){ //AMP
 
-    }
-    else if (RobotContainer.driver.getYButton()){ //SPEAKER
+    // }
+    // else if (RobotContainer.driver.getYButton()){ //SPEAKER
 
-    }
-    else if (RobotContainer.driver.getBButton()){ //FLOOR
+    // }
+    // else if (RobotContainer.driver.getBButton()){ //FLOOR
 
-    }
+    // }
   }
 
   // Called once the command ends or is interrupted.
