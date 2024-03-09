@@ -36,7 +36,7 @@ public class RobotContainer {
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
-    private final ArmUpdated arm = new ArmUpdated(); 
+    private final ArmUpdated arm = new ArmUpdated(driver); 
     private final Intake intake = new Intake(); //set default command when its made
 
     // Commands

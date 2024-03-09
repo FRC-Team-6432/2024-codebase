@@ -49,9 +49,12 @@ public class ArmUpdated extends SubsystemBase {
 
   double currentAngle = 0;
 
+  final XboxController driver;
+
   public NetworkTable table;
 
-  public ArmUpdated() {
+  public ArmUpdated(XboxController driver) {
+    this.driver = driver;
     motorRight.setInverted(true);
     motorLeft.follow(motorRight);
     table = NetworkTableInstance.getDefault().getTable("limelight");
@@ -85,9 +88,9 @@ public class ArmUpdated extends SubsystemBase {
   }
 
   public void setArmToAngle(double angleDeg) {
-    // sets arm to given angle above intake base angle
     double position = angleDeg/360 + INTAKE_ENCODER_VALUE;
     if (position > MAX_ENCODER_VALUE) {position = MAX_ENCODER_VALUE;}
+    if (position < INTAKE_ENCODER_VALUE) {position = INTAKE_ENCODER_VALUE;}
     motorRight.set(pidController.calculate(boreEncoder.getDistance(), position));  
   }
 
@@ -110,9 +113,14 @@ public class ArmUpdated extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    if (driver.getAButtonPressed()) {setArmToAmp();}
+    else if (driver.getBButtonPressed()) {setArmToIntake();}
+
     setArmToAngle(currentAngle);
     double absPos = boreEncoder.getAbsolutePosition();
     SmartDashboard.putNumber("encoder position: ", absPos);
+    SmartDashboard.putBoolean("A: ", driver.getAButtonPressed());
+    SmartDashboard.putBoolean("B: ", driver.getBButtonPressed());
     // SmartDashboard.putNumber("set position", position);
   }
 }
