@@ -14,6 +14,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -110,5 +111,8 @@ public class ArmUpdated extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     setArmToAngle(currentAngle);
+    double absPos = boreEncoder.getAbsolutePosition();
+    SmartDashboard.putNumber("encoder position: ", absPos);
+    // SmartDashboard.putNumber("set position", position);
   }
 }

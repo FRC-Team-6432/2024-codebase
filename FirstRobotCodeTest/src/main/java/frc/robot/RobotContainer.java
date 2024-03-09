@@ -1,5 +1,7 @@
 package frc.robot;
 
+import java.util.function.BooleanSupplier;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -8,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.autos.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
@@ -38,7 +40,7 @@ public class RobotContainer {
     private final Intake intake = new Intake(); //set default command when its made
 
     // Commands
-    private final ArmAngle angle = new ArmAngle(arm);
+    private final ArmAngle angleCommand = new ArmAngle(arm);
     private final InNOut in = new InNOut(intake);
 
 
@@ -56,7 +58,7 @@ public class RobotContainer {
                 () -> robotCentric.getAsBoolean()
             )
         );
-        arm.setDefaultCommand(angle);
+        arm.setDefaultCommand(angleCommand);
         intake.setDefaultCommand(in);
     }
 
@@ -69,8 +71,7 @@ public class RobotContainer {
     private void configureButtonBindings() {
         /* Driver Buttons */
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
-        // driver.a().onTrue(Commands.run(
-        //     () -> arm.setArmToIntake(), arm));
+        new Trigger(()->driver.getAButtonPressed()).onTrue(angleCommand);
     }
 
     /**
