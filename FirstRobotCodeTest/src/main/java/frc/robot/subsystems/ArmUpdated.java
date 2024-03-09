@@ -25,9 +25,9 @@ public class ArmUpdated extends SubsystemBase {
   final int RIGHT_MOTOR_ID = 1;
   final int ENCODER_CHANNEL = 0;
 
-  final double LIMELIGHT_MOUNT_HEIGHT = 1270;
-  final double ARM_BASE_HEIGHT = 1270;
-  final double ARM_LENGTH = 582;
+  final double LIMELIGHT_MOUNT_HEIGHT = 1270; //mm
+  final double ARM_BASE_HEIGHT = 1270; //mm
+  final double ARM_LENGTH = 582; //mm
 
   final double LIMELIGHT_MOUNT_ANGLE = 90 - Math.toDegrees(Math.atan(37/54));
   final double SHOOTER_ARM_ANGLE = 110;
@@ -54,10 +54,10 @@ public class ArmUpdated extends SubsystemBase {
   }
 
   public double getAngleToGoal() {
-    NetworkTableEntry tx = table.getEntry("tx");
+    // NetworkTableEntry tx = table.getEntry("tx");
     NetworkTableEntry ty = table.getEntry("ty");
 
-    double x = tx.getDouble(0.0);
+    // double x = tx.getDouble(0.0);
     double y = ty.getDouble(0.0);
     
     double tagHeight = 1367;
@@ -81,8 +81,18 @@ public class ArmUpdated extends SubsystemBase {
   }
 
   public void setArmToAngle(double angleDeg) {
+    // sets arm to given angle above intake base angle
     double position = angleDeg/360 + INTAKE_ENCODER_VALUE;
+    if (position > MAX_ENCODER_VALUE) {position = MAX_ENCODER_VALUE;}
     motorLeft.set(ControlMode.Position, pidController.calculate(boreEncoder.getDistance(), position));  
+  }
+
+  public void setArmToIntake() {
+    setArmToAngle(0);
+  }
+
+  public void setArmToLimelightTrack() {
+    setArmToAngle(getAngleToGoal());
   }
 
   public void climb(XboxController controller){
