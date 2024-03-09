@@ -94,6 +94,9 @@ public class ArmUpdated extends SubsystemBase {
   public void setArmToLimelightTrack() {
     setArmToAngle(getAngleToGoal());
   }
+  public void setArmToAmp() {
+    setArmToAngle(MAX_ENCODER_VALUE);
+  }
 
   public void climb(XboxController controller){
       motorLeft.set(ControlMode.Velocity, controller.getLeftTriggerAxis());
