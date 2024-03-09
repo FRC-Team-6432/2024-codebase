@@ -88,7 +88,7 @@ public class ArmUpdated extends SubsystemBase {
     // sets arm to given angle above intake base angle
     double position = angleDeg/360 + INTAKE_ENCODER_VALUE;
     if (position > MAX_ENCODER_VALUE) {position = MAX_ENCODER_VALUE;}
-    motorLeft.set(ControlMode.Position, pidController.calculate(boreEncoder.getDistance(), position));  
+    motorRight.set(pidController.calculate(boreEncoder.getDistance(), position));  
   }
 
   public void setArmToIntake() {
