@@ -27,10 +27,12 @@ public class Intake extends SubsystemBase {
 
   public void yoink(XboxController controller){
     if (sensor.get()){
-      intakeMotor.set(ControlMode.Velocity, 0);
-    }
-    else if(controller.getLeftBumper()){
-      intakeMotor.set(ControlMode.Velocity, 1);
+      if(controller.getLeftBumper()){
+        intakeMotor.set(ControlMode.Velocity, 1);
+      }
+      else{
+        intakeMotor.set(ControlMode.Velocity, 0);
+      }
     }
     else{
       intakeMotor.set(ControlMode.Velocity, 0);
@@ -39,7 +41,7 @@ public class Intake extends SubsystemBase {
 
   public void yeet(XboxController controller){
     if (controller.getRightBumper()){
-      shooterLeft.set(1);
+      shooterLeft.set(-1);
       shooterRight.set(-1);
     }
     else{
