@@ -71,9 +71,9 @@ public class RobotContainer {
     private void configureButtonBindings() {
         /* Driver Buttons */
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
-        new Trigger(()->driver.getAButtonPressed()).onTrue(Commands.runOnce(
-            ()->arm.setArmToAmp(), 
-            arm));
+        // new Trigger(()->driver.getAButtonPressed()).onTrue(Commands.runOnce(
+        //     ()->arm.setArmToAmp(), 
+        //     arm));
     }
 
     /**
