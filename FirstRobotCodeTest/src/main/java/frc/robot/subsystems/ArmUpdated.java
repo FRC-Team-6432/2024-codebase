@@ -19,11 +19,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+
 public class ArmUpdated extends SubsystemBase {
   /** Creates a new Arm (Elliot's Version). */
-  final int LEFT_MOTOR_ID = 0;
+  final int LEFT_MOTOR_ID = 2;
   final int RIGHT_MOTOR_ID = 1;
-  final int ENCODER_CHANNEL = 0;
+  final int ENCODER_CHANNEL = 3;
 
   final double LIMELIGHT_MOUNT_HEIGHT = 1270; //mm
   final double ARM_BASE_HEIGHT = 1270; //mm

@@ -19,7 +19,7 @@ import frc.robot.subsystems.*;
  */
 public class RobotContainer {
     /* Controllers */
-    public final XboxController driver = new XboxController(0);
+    public final static XboxController driver = new XboxController(0);
 
     /* Drive Controls */
     private final int translationAxis = XboxController.Axis.kLeftY.value;
@@ -35,6 +35,9 @@ public class RobotContainer {
     private final ArmUpdated arm = new ArmUpdated(); 
     private final Intake intake = new Intake(); //set default command when its made
 
+    private final ArmAngle angle = new ArmAngle(arm);
+    private final InNOut in = new InNOut(intake);
+
     
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -48,6 +51,9 @@ public class RobotContainer {
                 () -> robotCentric.getAsBoolean()
             )
         );
+        arm.setDefaultCommand(angle);
+        intake.setDefaultCommand(in);
+
 
         // Configure the button bindings
         configureButtonBindings();

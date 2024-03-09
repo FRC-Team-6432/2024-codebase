@@ -20,7 +20,7 @@ public class Intake extends SubsystemBase {
   private TalonFX shooterRight = new TalonFX(3);
   
   public Intake() {
-    sensor = new DigitalInput(1);
+    sensor = new DigitalInput(0);
     
   }
 
