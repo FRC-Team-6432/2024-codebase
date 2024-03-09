@@ -37,6 +37,11 @@ public class RobotContainer {
     private final ArmUpdated arm = new ArmUpdated(); 
     private final Intake intake = new Intake(); //set default command when its made
 
+    private final ArmAngle angle = new ArmAngle(arm);
+    private final InNOut in = new InNOut(intake);
+
+    
+
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
         s_Swerve.setDefaultCommand(
@@ -48,6 +53,9 @@ public class RobotContainer {
                 () -> driver.leftBumper().getAsBoolean()
             )
         );
+        arm.setDefaultCommand(angle);
+        intake.setDefaultCommand(in);
+
 
         // Configure the button bindings
         configureButtonBindings();
