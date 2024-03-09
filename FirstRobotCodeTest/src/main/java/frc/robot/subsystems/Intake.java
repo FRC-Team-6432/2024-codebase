@@ -30,12 +30,15 @@ public class Intake extends SubsystemBase {
   }
 
   public void yoink(XboxController controller){
+    SmartDashboard.putBoolean("intake button: ", controller.getLeftBumper());
+    SmartDashboard.putBoolean("intake", false);
     if(controller.getLeftBumper()){
       if(!sensor.get()){
         intakeMotor.set(0);
       }
       else{
-        intakeMotor.set(1);
+        SmartDashboard.putBoolean("intake", true);
+        intakeMotor.set(0.4);
       }
     }
     else{
@@ -52,13 +55,13 @@ public class Intake extends SubsystemBase {
     else{
       shooterLeft.set(0);
       shooterRight.set(0);
-      intakeMotor.set(0);
     }
   }
 
   @Override
   public void periodic() {
-    SmartDashboard.putBoolean("sensor", sensor.get());
+    SmartDashboard.putBoolean("sensor", !sensor.get());
+    
     // This method will be called once per scheduler run
   }
 }

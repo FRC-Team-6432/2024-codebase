@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 
@@ -27,12 +28,14 @@ public class ArmUpdated extends SubsystemBase {
   final int RIGHT_MOTOR_ID = 1;
   final int ENCODER_CHANNEL = 3;
 
-  final double LIMELIGHT_MOUNT_HEIGHT = 1270; //mm
-  final double ARM_BASE_HEIGHT = 1270; //mm
-  final double ARM_LENGTH = 582; //mm
+  final double LIMELIGHT_MOUNT_HEIGHT = 250; //mm
+  final double ARM_BASE_HEIGHT = 350; //mm
+  final double ARM_LENGTH = 580; //mm
 
-  final double LIMELIGHT_MOUNT_ANGLE = 90 - Math.toDegrees(Math.atan(37/54));
-  final double SHOOTER_ARM_ANGLE = 110;
+  final double LIMELIGHT_MOUNT_ANGLE = 40;
+  final double SHOOTER_ARM_ANGLE = 120;
+
+  final double SPEAKER_TAG_HEIGHT = 1367;
 
   final double INTAKE_ENCODER_VALUE = 0.143; // Encoder value when arm is at 0 deg to horizontal ie intake position
   final double MAX_ENCODER_VALUE = INTAKE_ENCODER_VALUE+0.3; // Max arm is allowed to go back
@@ -55,6 +58,10 @@ public class ArmUpdated extends SubsystemBase {
 
   public ArmUpdated(XboxController driver) {
     this.driver = driver;
+
+    motorRight.setNeutralMode(NeutralMode.Brake);
+    motorLeft.setNeutralMode(NeutralMode.Brake);
+    
     motorRight.setInverted(true);
     motorLeft.follow(motorRight);
     table = NetworkTableInstance.getDefault().getTable("limelight");
@@ -66,11 +73,9 @@ public class ArmUpdated extends SubsystemBase {
 
     // double x = tx.getDouble(0.0);
     double y = ty.getDouble(0.0);
-    
-    double tagHeight = 1367;
 
-    double heightFromLimelight = tagHeight-LIMELIGHT_MOUNT_HEIGHT;
-    double heightFromArmBase = tagHeight - ARM_BASE_HEIGHT;
+    double heightFromLimelight = SPEAKER_TAG_HEIGHT-LIMELIGHT_MOUNT_HEIGHT;
+    double heightFromArmBase = SPEAKER_TAG_HEIGHT - ARM_BASE_HEIGHT;
 
     double angleFromLimelight = LIMELIGHT_MOUNT_ANGLE + y;
     
