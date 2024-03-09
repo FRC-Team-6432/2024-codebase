@@ -28,10 +28,10 @@ public class Intake extends SubsystemBase {
 
   public void yoink(XboxController controller){
     if(controller.getLeftBumper()){
-      intakeMotor.set(VictorSPXControlMode.Velocity, 1);
+      intakeMotor.set(ControlMode.Current, 10);
     }
     else{
-      intakeMotor.set(VictorSPXControlMode.Velocity, 0);
+      intakeMotor.set(ControlMode.Current, 0);
     }
   }
 
