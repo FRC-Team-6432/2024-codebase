@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.VictorSPXControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -26,16 +27,11 @@ public class Intake extends SubsystemBase {
   }
 
   public void yoink(XboxController controller){
-    if (sensor.get()){
-      if(controller.getLeftBumper()){
-        intakeMotor.set(ControlMode.Velocity, 1);
-      }
-      else{
-        intakeMotor.set(ControlMode.Velocity, 0);
-      }
+    if(controller.getLeftBumper()){
+      intakeMotor.set(VictorSPXControlMode.Velocity, 1);
     }
     else{
-      intakeMotor.set(ControlMode.Velocity, 0);
+      intakeMotor.set(VictorSPXControlMode.Velocity, 0);
     }
   }
 
