@@ -58,7 +58,7 @@ public class RobotContainer {
                 () -> robotCentric.getAsBoolean()
             )
         );
-        arm.setDefaultCommand(angleCommand);
+        // arm.setDefaultCommand(angleCommand);
         intake.setDefaultCommand(in);
     }
 
@@ -71,7 +71,9 @@ public class RobotContainer {
     private void configureButtonBindings() {
         /* Driver Buttons */
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
-        new Trigger(()->driver.getAButtonPressed()).onTrue(angleCommand);
+        new Trigger(()->driver.getAButtonPressed()).onTrue(Commands.runOnce(
+            ()->arm.setArmToAmp(), 
+            arm));
     }
 
     /**

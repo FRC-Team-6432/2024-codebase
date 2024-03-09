@@ -30,15 +30,15 @@ public class ArmAngle extends Command {
   @Override
   public void execute() {
     //  arm.climb(RobotContainer.driver);
-    if(RobotContainer.driver.getAButtonPressed()){ //AMP
-      arm.setArmToAmp();
-    }
-    else if (RobotContainer.driver.getYButton()){ //SPEAKER
-        arm.setArmToLimelightTrack();
-    }
-    else if (RobotContainer.driver.getBButton()){ //FLOOR
-      arm.setArmToIntake();
-    }
+    // if(RobotContainer.driver.getAButtonPressed()){ //AMP
+    //   arm.setArmToAmp();
+    // }
+    // else if (RobotContainer.driver.getYButton()){ //SPEAKER
+    //     arm.setArmToLimelightTrack();
+    // }
+    // else if (RobotContainer.driver.getBButton()){ //FLOOR
+    //   arm.setArmToIntake();
+    // }
   }
 
   // Called once the command ends or is interrupted.
