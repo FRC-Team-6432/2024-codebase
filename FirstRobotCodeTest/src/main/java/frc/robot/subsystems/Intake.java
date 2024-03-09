@@ -4,12 +4,13 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.XboxController;
 
 
 public class Intake extends SubsystemBase {
@@ -40,6 +41,10 @@ public class Intake extends SubsystemBase {
     if (controller.getRightBumper()){
       shooterLeft.set(1);
       shooterRight.set(-1);
+    }
+    else{
+      shooterLeft.set(0);
+      shooterRight.set(0);
     }
   }
 

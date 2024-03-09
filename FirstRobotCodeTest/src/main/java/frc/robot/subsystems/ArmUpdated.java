@@ -46,6 +46,8 @@ public class ArmUpdated extends SubsystemBase {
 
   PIDController pidController = new PIDController(kp, ki, kd);
 
+  double currentAngle = 0;
+
   public NetworkTable table;
 
   public ArmUpdated() {
@@ -89,23 +91,24 @@ public class ArmUpdated extends SubsystemBase {
   }
 
   public void setArmToIntake() {
-    setArmToAngle(0);
+    currentAngle = 0;
   }
 
   public void setArmToLimelightTrack() {
-    setArmToAngle(getAngleToGoal());
+    currentAngle = getAngleToGoal();
   }
   public void setArmToAmp() {
-    setArmToAngle(MAX_ENCODER_VALUE);
+    currentAngle = MAX_ENCODER_VALUE;
   }
 
-  public void climb(XboxController controller){
-      motorLeft.set(ControlMode.Velocity, controller.getLeftTriggerAxis());
-      motorLeft.set(ControlMode.Velocity, -controller.getRightTriggerAxis());
-  }
+  // public void climb(XboxController controller){
+  //     motorLeft.set(ControlMode.Velocity, controller.getLeftTriggerAxis());
+  //     motorLeft.set(ControlMode.Velocity, -controller.getRightTriggerAxis());
+  // }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    setArmToAngle(currentAngle);
   }
 }

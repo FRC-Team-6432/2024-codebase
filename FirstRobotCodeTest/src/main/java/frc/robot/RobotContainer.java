@@ -21,7 +21,7 @@ import frc.robot.subsystems.*;
  */
 public class RobotContainer {
     /* Controllers */
-    public final CommandXboxController driver = new CommandXboxController(0);
+    public final static XboxController driver = new XboxController(0);
 
     /* Drive Controls */
     private final int translationAxis = XboxController.Axis.kLeftY.value;
@@ -29,8 +29,8 @@ public class RobotContainer {
     private final int rotationAxis = XboxController.Axis.kRightX.value;
 
     /* Driver Buttons */
-    // private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
-    // private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
+    private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
+    private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
@@ -53,7 +53,7 @@ public class RobotContainer {
                 () -> -driver.getRawAxis(translationAxis), 
                 () -> -driver.getRawAxis(strafeAxis), 
                 () -> -driver.getRawAxis(rotationAxis), 
-                () -> driver.leftBumper().getAsBoolean()
+                () -> robotCentric.getAsBoolean()
             )
         );
         arm.setDefaultCommand(angle);
@@ -68,9 +68,9 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         /* Driver Buttons */
-        // zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
-        driver.a().onTrue(Commands.runOnce(
-            () -> arm.setArmToIntake(), arm));
+        zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
+        // driver.a().onTrue(Commands.run(
+        //     () -> arm.setArmToIntake(), arm));
     }
 
     /**
