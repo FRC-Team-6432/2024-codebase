@@ -29,7 +29,12 @@ public class Intake extends SubsystemBase {
 
   public void yoink(XboxController controller){
     if(controller.getLeftBumper()){
-      intakeMotor.set(1);
+      if(sensor.get()){
+        intakeMotor.set(0);
+      }
+      else{
+        intakeMotor.set(1);
+      }
     }
     else{
       intakeMotor.set(0);
@@ -40,14 +45,12 @@ public class Intake extends SubsystemBase {
     if (controller.getRightBumper()){
       shooterLeft.set(-1);
       shooterRight.set(1);
-      timer.start();
-      if(timer.getDuration() > 1){
-        intakeMotor.set(1);
-      }
+      intakeMotor.set(0.2);
     }
     else{
       shooterLeft.set(0);
       shooterRight.set(0);
+      intakeMotor.set(0);
     }
   }
 
