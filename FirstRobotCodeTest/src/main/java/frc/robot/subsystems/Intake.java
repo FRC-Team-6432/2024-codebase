@@ -29,7 +29,7 @@ public class Intake extends SubsystemBase {
 
   public void yoink(XboxController controller){
     if(controller.getLeftBumper()){
-      if(sensor.get()){
+      if(!sensor.get()){
         intakeMotor.set(0);
       }
       else{

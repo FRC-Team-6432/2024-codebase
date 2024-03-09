@@ -115,13 +115,12 @@ public class ArmUpdated extends SubsystemBase {
     // This method will be called once per scheduler run
     if (driver.getAButtonPressed()) {setArmToAmp();}
     else if (driver.getBButtonPressed()) {setArmToIntake();}
+    else if (driver.getYButtonPressed()) {setArmToLimelightTrack();}
 
     setArmToAngle(currentAngle);
     double absPos = boreEncoder.getAbsolutePosition();
     SmartDashboard.putNumber("encoder position: ", absPos);
     SmartDashboard.putNumber("position", currentAngle);
-    SmartDashboard.putBoolean("A: ", driver.getAButtonPressed());
-    SmartDashboard.putBoolean("B: ", driver.getBButtonPressed());
     // SmartDashboard.putNumber("set position", position);
   }
 }
