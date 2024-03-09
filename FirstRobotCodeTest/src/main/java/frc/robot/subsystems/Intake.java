@@ -12,7 +12,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.XboxController;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
+import com.ctre.phoenix.time.StopWatch;
 
 public class Intake extends SubsystemBase {
   /** Creates a new Intake. */
@@ -20,6 +20,7 @@ public class Intake extends SubsystemBase {
   private WPI_VictorSPX intakeMotor = new WPI_VictorSPX(5);
   private TalonFX shooterLeft = new TalonFX(4);
   private TalonFX shooterRight = new TalonFX(3);
+  private StopWatch timer = new StopWatch();
   
   public Intake() {
     sensor = new DigitalInput(0);
@@ -28,10 +29,10 @@ public class Intake extends SubsystemBase {
 
   public void yoink(XboxController controller){
     if(controller.getLeftBumper()){
-      intakeMotor.set(VictorSPXControlMode.Velocity, 1);
+      intakeMotor.set(1);
     }
     else{
-      intakeMotor.set(VictorSPXControlMode.Velocity, 0);
+      intakeMotor.set(0);
     }
   }
 
@@ -39,6 +40,10 @@ public class Intake extends SubsystemBase {
     if (controller.getRightBumper()){
       shooterLeft.set(-1);
       shooterRight.set(1);
+      timer.start();
+      if(timer.getDuration() > 1){
+        intakeMotor.set(1);
+      }
     }
     else{
       shooterLeft.set(0);
