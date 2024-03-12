@@ -118,9 +118,9 @@ public class ArmUpdated extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    if (driver.getAButtonPressed()) {setArmToAmp();}
-    else if (driver.getBButtonPressed()) {setArmToIntake();}
-    else if (driver.getYButtonPressed()) {setArmToLimelightTrack();}
+    // if (driver.getAButtonPressed()) {setArmToAmp();}
+    // else if (driver.getBButtonPressed()) {setArmToIntake();}
+    // else if (driver.getYButtonPressed()) {setArmToLimelightTrack();}
 
     setArmToAngle(currentAngle);
     double absPos = boreEncoder.getAbsolutePosition();
