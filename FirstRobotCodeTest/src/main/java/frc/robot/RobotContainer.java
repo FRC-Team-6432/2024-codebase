@@ -74,7 +74,12 @@ public class RobotContainer {
          new Trigger(()->driver.getAButtonPressed()).onTrue(Commands.runOnce(
              ()->arm.setArmToAmp(), 
              arm));
-         new Trigger(())
+         new Trigger(()->driver.getBButtonPressed()).onTrue(Commands.runOnce(
+             ()->arm.setArmToIntake(),
+             arm));
+         new Trigger(()->driver.getYButtonPressed()).onTrue(Commands.runOnce(
+            ()->arm.setArmToLimelightTrack(),
+            arm));       
     }
 
     /**
