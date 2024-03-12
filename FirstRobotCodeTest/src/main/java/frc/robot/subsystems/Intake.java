@@ -30,7 +30,6 @@ public class Intake extends SubsystemBase {
   }
 
   public void yoink(XboxController controller){
-    SmartDashboard.putBoolean("intake button: ", controller.getLeftBumper());
     SmartDashboard.putBoolean("intake", false);
     if(controller.getLeftBumper()){
       if(!sensor.get()){
