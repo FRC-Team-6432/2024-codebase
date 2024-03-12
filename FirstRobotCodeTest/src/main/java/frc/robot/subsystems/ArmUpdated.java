@@ -37,14 +37,14 @@ public class ArmUpdated extends SubsystemBase {
 
   final double SPEAKER_TAG_HEIGHT = 1367;
 
-  final double INTAKE_ENCODER_VALUE = 0.143; // Encoder value when arm is at 0 deg to horizontal ie intake position
+  final double INTAKE_ENCODER_VALUE = 0.139; // Encoder value when arm is at 0 deg to horizontal ie intake position
   final double MAX_ENCODER_VALUE = INTAKE_ENCODER_VALUE+0.3; // Max arm is allowed to go back
 
   WPI_TalonSRX motorLeft = new WPI_TalonSRX(LEFT_MOTOR_ID);
   WPI_TalonSRX motorRight = new WPI_TalonSRX(RIGHT_MOTOR_ID);
   DutyCycleEncoder boreEncoder = new DutyCycleEncoder(ENCODER_CHANNEL);
 
-  double kp = 8;
+  double kp = 10;
   double ki = 0;
   double kd = 0;
 
