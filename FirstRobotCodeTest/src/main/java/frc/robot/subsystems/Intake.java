@@ -38,7 +38,7 @@ public class Intake extends SubsystemBase {
       }
       else{
         SmartDashboard.putBoolean("intake", true);
-        intakeMotor.set(0.7);
+        intakeMotor.set(0.4);
       }
     }
     else{
@@ -50,7 +50,7 @@ public class Intake extends SubsystemBase {
     if (controller.getRightBumper()){
       shooterLeft.set(-1);
       shooterRight.set(1);
-      intakeMotor.set(0.2);
+      intakeMotor.set(0.15);
       
     }
     else{
