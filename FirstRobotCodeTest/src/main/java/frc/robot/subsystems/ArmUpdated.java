@@ -94,9 +94,12 @@ public class ArmUpdated extends SubsystemBase {
 
   public void setArmToAngle(double angleDeg) {
     double position = angleDeg/360 + INTAKE_ENCODER_VALUE;
-    if (position > MAX_ENCODER_VALUE) {position = MAX_ENCODER_VALUE;}
-    if (position < INTAKE_ENCODER_VALUE) {position = INTAKE_ENCODER_VALUE;}
-    motorRight.set(pidController.calculate(boreEncoder.getDistance(), position));  
+    if (!Double.isNaN(angleDeg)) {
+      if (position > MAX_ENCODER_VALUE) {position = MAX_ENCODER_VALUE;}
+      if (position < INTAKE_ENCODER_VALUE) {position = INTAKE_ENCODER_VALUE;}
+      motorRight.set(pidController.calculate(boreEncoder.getDistance(), position));  
+    }
+    
   }
 
   public void setArmToIntake() {
@@ -123,6 +126,7 @@ public class ArmUpdated extends SubsystemBase {
     else if (driver.getYButtonPressed()) {setArmToLimelightTrack();}
 
     setArmToAngle(currentAngle);
+    
     double absPos = boreEncoder.getAbsolutePosition();
     SmartDashboard.putNumber("encoder position: ", absPos);
     SmartDashboard.putNumber("position", currentAngle);
