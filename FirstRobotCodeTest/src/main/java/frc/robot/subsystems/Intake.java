@@ -48,9 +48,15 @@ public class Intake extends SubsystemBase {
 
   public void yeet(XboxController controller){
     if (controller.getRightBumper()){
+      timer.reset();
+      timer.start();
       shooterLeft.set(-1);
       shooterRight.set(1);
-      intakeMotor.set(0.15);
+      intakeMotor.set(0);
+      while(timer.get()<2){
+
+      }
+      intakeMotor.set(0.3);
       
     }
     else{
