@@ -30,8 +30,9 @@ public class AutoAim extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    arm.setArmToIntake();
+    // arm.setArmToIntake();
     while(timer.get() < 5){
+      arm.aimAuto();
     }
     
     finish = true;

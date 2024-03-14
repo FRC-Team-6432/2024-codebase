@@ -102,6 +102,11 @@ public class ArmUpdated extends SubsystemBase {
     
   }
 
+  public void aimAuto() {
+    double goalAngle = getAngleToGoal();
+    setArmToAngle(goalAngle);
+  }
+
   public void setArmToIntake() {
     currentAngle = 0;
   }
@@ -126,7 +131,7 @@ public class ArmUpdated extends SubsystemBase {
     else if (driver.getYButtonPressed()) {setArmToLimelightTrack();}
 
     setArmToAngle(currentAngle);
-    
+
     double absPos = boreEncoder.getAbsolutePosition();
     SmartDashboard.putNumber("encoder position: ", absPos);
     SmartDashboard.putNumber("position", currentAngle);
