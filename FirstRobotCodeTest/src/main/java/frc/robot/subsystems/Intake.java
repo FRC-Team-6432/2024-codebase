@@ -52,9 +52,11 @@ public class Intake extends SubsystemBase {
       timer.start();
       shooterLeft.set(-1);
       shooterRight.set(1);
-      intakeMotor.set(0);
-      while(timer.get()<2){
-
+      while(timer.get()<1){
+        // if (!controller.getRightBumper()) {
+        //   break;
+        // }
+        intakeMotor.set(0);
       }
       intakeMotor.set(0.3);
       
