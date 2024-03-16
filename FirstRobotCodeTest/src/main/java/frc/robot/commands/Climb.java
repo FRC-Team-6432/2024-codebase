@@ -20,7 +20,7 @@ public class Climb extends Command {
   @Override
   public void initialize() {
     climber.climb(frc.robot.RobotContainer.driver);
-    // climber.unclimb(frc.robot.RobotContainer.driver);
+    climber.unclimb(frc.robot.RobotContainer.driver);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

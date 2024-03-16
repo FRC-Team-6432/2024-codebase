@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Climber extends SubsystemBase {
   /** Creates a new Climber. */
-  WPI_TalonSRX climberLeft = new WPI_TalonSRX(6);
-  WPI_TalonSRX climberRight = new WPI_TalonSRX(7);
+  WPI_TalonSRX climberLeft = new WPI_TalonSRX(11);
+  WPI_TalonSRX climberRight = new WPI_TalonSRX(10);
   public Climber() {
     climberRight.follow(climberLeft);
     climberRight.setInverted(true);
@@ -26,7 +26,7 @@ public class Climber extends SubsystemBase {
   public void climb(XboxController controller){
     climberLeft.set(controller.getRightTriggerAxis());
   }
-  // public void unclimb(XboxController controller){
-  //   climberLeft.set(-1*controller.getRightTriggerAxis());
-  // }
+  public void unclimb(XboxController controller){
+    climberLeft.set(-1*controller.getRightTriggerAxis());
+  }
 }
