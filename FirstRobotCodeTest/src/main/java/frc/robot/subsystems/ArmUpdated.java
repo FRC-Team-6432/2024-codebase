@@ -119,6 +119,14 @@ public class ArmUpdated extends SubsystemBase {
     currentAngle = 90;
   }
 
+  public void setArmToClimb(){
+    currentAngle = 10;
+  }
+
+  public void setArmTo45(){
+    currentAngle = 45;
+  }
+
   // public void climb(XboxController controller){
   //     motorLeft.set(ControlMode.Velocity, controller.getLeftTriggerAxis());
   //     motorLeft.set(ControlMode.Velocity, -controller.getRightTriggerAxis());

@@ -4,10 +4,7 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.VictorSPXControlMode;
 import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.XboxController;
@@ -15,7 +12,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Timer;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-import com.ctre.phoenix.time.StopWatch;
 
 public class Intake extends SubsystemBase {
   /** Creates a new Intake. */
@@ -32,7 +28,7 @@ public class Intake extends SubsystemBase {
 
   public void yoink(XboxController controller){
     SmartDashboard.putBoolean("intake", false);
-    if(controller.getLeftBumper()){
+    if(controller.getRightBumper()){
       if(!sensor.get()){
         intakeMotor.set(0);
       }
@@ -46,19 +42,15 @@ public class Intake extends SubsystemBase {
     }
   }
 
+  public boolean getNote(){
+      return !sensor.get();
+  }
+
   public void yeet(XboxController controller){
-    if (controller.getRightBumper()){
-      timer.reset();
-      timer.start();
-      shooterLeft.set(-1);
-      shooterRight.set(1);
-      while(timer.get()<1){
-        // if (!controller.getRightBumper()) {
-        //   break;
-        // }
-        intakeMotor.set(0);
-      }
-      intakeMotor.set(0.3);
+    if (controller.getLeftBumper()){
+      shooterLeft.set(-0.8);
+      shooterRight.set(0.8);
+      intakeMotor.set(0.4);
       
     }
     else{
@@ -67,10 +59,20 @@ public class Intake extends SubsystemBase {
     }
   }
 
+  public void autoyoink(){
+    intakeMotor.set(0.6);
+  }
+
   public void autoyeet(){
     
     shooterLeft.set(-1);
     shooterRight.set(1);
+    intakeMotor.set(0.2);
+  }
+
+  public void autoyeet2(){
+    shooterLeft.set(-0.7);
+    shooterRight.set(0.7);
     intakeMotor.set(0.3);
   }
   public void stop(){

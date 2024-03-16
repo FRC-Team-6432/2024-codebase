@@ -5,20 +5,32 @@
 package frc.robot.autos;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.Intake;
 
 public class IntakeOn extends Command {
   /** Creates a new IntakeOn. */
-  public IntakeOn() {
+  Boolean finish;
+  Intake intake;
+  public IntakeOn(Intake intoke) {
+    intake = intoke;
+    addRequirements(intake);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    intake.autoyoink();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    finish = intake.getNote();
+    if (finish){
+      intake.stop();
+    }
+  }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -27,6 +39,6 @@ public class IntakeOn extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return finish;
   }
 }

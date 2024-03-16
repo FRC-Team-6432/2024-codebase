@@ -2,21 +2,24 @@ package frc.robot;
 
 import java.util.function.BooleanSupplier;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.autos.AutoAim;
-import frc.robot.autos.AutoShoot;
 import frc.robot.autos.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -41,10 +44,14 @@ public class RobotContainer {
     private final Swerve s_Swerve = new Swerve();
     private final ArmUpdated arm = new ArmUpdated(driver); 
     private final Intake intake = new Intake(); //set default command when its made
+    // private final Climber climber = new Climber();
 
     // Commands
     private final ArmAngle angleCommand = new ArmAngle(arm);
     private final InNOut in = new InNOut(intake);
+
+    // private final SlewRateLimiter filter = new SlewRateLimiter(0.5);
+    // private final SlewRateLimiter driveFilter = new SlewRateLimiter(3);
 
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -57,12 +64,15 @@ public class RobotContainer {
                 s_Swerve, 
                 () -> -driver.getRawAxis(translationAxis), 
                 () -> -driver.getRawAxis(strafeAxis), 
-                () -> -driver.getRawAxis(rotationAxis), 
+                () -> -0.25*driver.getRawAxis(rotationAxis), 
                 () -> robotCentric.getAsBoolean()
             )
         );
         // arm.setDefaultCommand(angleCommand);
         intake.setDefaultCommand(in);
+        //camera
+        UsbCamera camera = CameraServer.startAutomaticCapture();
+        camera.setResolution(320, 240);
     }
 
     /**
@@ -76,10 +86,14 @@ public class RobotContainer {
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
         new Trigger(()->driver.getAButtonPressed()).onTrue(Commands.runOnce(
             ()->arm.setArmToAmp(), arm));
-        new Trigger(()->driver.getBButtonPressed()).onTrue(Commands.runOnce(
+        new Trigger(()->driver.getRightBumperPressed()).onTrue(Commands.runOnce(
             ()->arm.setArmToIntake(), arm));
+        new Trigger(()->driver.getRightBumperReleased() && driver.getYButtonReleased()  && driver.getXButtonReleased() && driver.getAButtonReleased()).onTrue(Commands.runOnce(
+            ()->arm.setArmTo45(), arm));
         new Trigger(()->driver.getYButtonPressed()).onTrue(Commands.runOnce(
             ()->arm.setArmToLimelightTrack(), arm));
+        new Trigger(()->driver.getXButtonPressed()).onTrue(Commands.runOnce(
+            ()->arm.setArmToClimb(), arm));
     }
 
     /**
@@ -89,6 +103,13 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        return new SequentialCommandGroup(new AutoAim(arm), new AutoShoot(intake), new exampleAuto(s_Swerve));
+        return new SequentialCommandGroup(
+        new AutoAim(arm), 
+        new AutoShoot(intake), 
+        new AutoDown(arm),
+        new ParallelCommandGroup(new exampleAuto(s_Swerve), new IntakeOn(intake)), 
+        //new DriveBack(s_Swerve),
+        new AutoAim(arm), 
+        new AutoShoot(intake));
     }
 }

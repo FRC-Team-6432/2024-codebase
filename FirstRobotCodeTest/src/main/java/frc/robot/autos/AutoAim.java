@@ -31,7 +31,7 @@ public class AutoAim extends Command {
   @Override
   public void execute() {
     // arm.setArmToIntake();
-    while(timer.get() < 5){
+    while(timer.get() < 1.5){
       arm.aimAuto();
     }
     

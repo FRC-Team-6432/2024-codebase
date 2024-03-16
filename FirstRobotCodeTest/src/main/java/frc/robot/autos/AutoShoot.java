@@ -25,9 +25,10 @@ public class AutoShoot extends Command {
   public void initialize() {
     timer.reset();
     timer.start();
-    while (timer.get() < 3){
+    while (timer.get() < 2){
       intake.autoyeet();
     }
+    intake.stop();
     finish = true;
   }
 
