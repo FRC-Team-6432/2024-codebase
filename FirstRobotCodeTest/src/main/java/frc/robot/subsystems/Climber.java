@@ -26,7 +26,7 @@ public class Climber extends SubsystemBase {
   public void climb(XboxController controller){
     climberLeft.set(controller.getLeftTriggerAxis());
   }
-  public void unclimb(XboxController controller){
-    climberLeft.set(-1*controller.getRightTriggerAxis());
-  }
+  // public void unclimb(XboxController controller){
+  //   climberLeft.set(-1*controller.getRightTriggerAxis());
+  // }
 }
