@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class MotorSubsystem extends SubsystemBase {
   // define attributes
-  private TalonFX ClimberLeft = new TalonFX(11);
+  private TalonSRX ClimberLeft = new TalonSRX(11);
   
 
   /** Creates a new MotorSubsystem. */
