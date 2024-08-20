@@ -7,9 +7,13 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class ExampleSubsystem extends SubsystemBase {
-  /** Creates a new ExampleSubsystem. */
-  public ExampleSubsystem() {}
+public class MotorSubsystem extends SubsystemBase {
+  // define attributes
+  private TalonFX ClimberLeft = new TalonFX(11);
+  
+
+  /** Creates a new MotorSubsystem. */
+  public MotorSubsystem() {}
 
   /**
    * Example command factory method.
