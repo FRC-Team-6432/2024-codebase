@@ -27,6 +27,10 @@ public class MotorSubsystem extends SubsystemBase {
     motor.set(-Math.abs(speed));
   }
 
+  public void stop(){
+    motor.set(0);
+  }
+
   /**
    * Example command factory method.
    *
@@ -54,7 +58,7 @@ public class MotorSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    motor.set(0.5);
+
   }
 
   @Override
