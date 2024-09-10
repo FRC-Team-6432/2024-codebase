@@ -19,7 +19,7 @@ public class MotorSubsystem extends SubsystemBase {
     this.motor = new WPI_TalonSRX(can_id);
   }
 
-  public void spinForward(double speed){
+  public void spinForwards(double speed){
     motor.set(Math.abs(speed));
   }
 
@@ -39,6 +39,7 @@ public class MotorSubsystem extends SubsystemBase {
   public Command exampleMethodCommand() {
     // Inline construction of command goes here.
     // Subsystem::RunOnce implicitly requires `this` subsystem.
+    
     return runOnce(
         () -> {
           /* one-time action goes here */

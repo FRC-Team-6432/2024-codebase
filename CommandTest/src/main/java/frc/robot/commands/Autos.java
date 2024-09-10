@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 public final class Autos {
   /** Example static factory for an autonomous command. */
   public static Command exampleAuto(MotorSubsystem subsystem) {
-    return new SequentialCommandGroup(new ExampleCommand(subsystem), new StopMotor(subsystem));
+    return new SequentialCommandGroup(new SpinForward(subsystem), new StopMotor(subsystem));
   }
 
   private Autos() {
