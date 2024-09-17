@@ -56,8 +56,6 @@ public class RobotContainer {
     m_driverController.y().or(m_driverController.a()).onFalse(new StopMotor(m_subsystem));
   }
 
-
-
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
