@@ -31,6 +31,10 @@ public class MotorSubsystem extends SubsystemBase {
     motor.set(0);
   }
 
+  public void setSpeed(double speed) {
+    motor.set(speed);
+  }
+
   /**
    * Example command factory method.
    *
