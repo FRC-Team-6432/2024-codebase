@@ -6,6 +6,7 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
+import frc.robot.commands.SetSpeed;
 import frc.robot.commands.SpinBackward;
 import frc.robot.commands.SpinForward;
 import frc.robot.commands.StopMotor;
@@ -49,11 +50,17 @@ public class RobotContainer {
         //.onTrue(new SpinForward(m_subsystem));
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-    // cancelling on release.
-    m_driverController.y().whileTrue(new SpinForward(m_subsystem));
-    m_driverController.a().whileTrue(new SpinBackward(m_subsystem));
+    // // cancelling on release.
+    // m_driverController.y().whileTrue(new SpinForward(m_subsystem));
+    // m_driverController.a().whileTrue(new SpinBackward(m_subsystem));
 
-    m_driverController.y().or(m_driverController.a()).onFalse(new StopMotor(m_subsystem));
+    // m_driverController.y().or(m_driverController.a()).onFalse(new StopMotor(m_subsystem));
+    m_subsystem.setDefaultCommand(
+      new SetSpeed(
+        this.m_subsystem, 
+        () -> this.m_driverController.getLeftY()
+      )
+    );
   }
 
   /**
