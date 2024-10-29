@@ -2,6 +2,7 @@ package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -37,13 +38,13 @@ public class RobotContainer {
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
-    private final ArmUpdated arm = new ArmUpdated(driver); 
-    private final Intake intake = new Intake(); //set default command when its made
+    // private final ArmUpdated arm = new ArmUpdated(driver); 
+    // private final Intake intake = new Intake(); //set default command when its made
     // private final Climber climber = new Climber();
 
-    // Commands
-    private final ArmAngle angleCommand = new ArmAngle(arm);
-    private final InNOut in = new InNOut(intake);
+    // // Commands
+    // private final ArmAngle angleCommand = new ArmAngle(arm);
+    // private final InNOut in = new InNOut(intake);
 
     // private final SlewRateLimiter filter = new SlewRateLimiter(0.5);
     // private final SlewRateLimiter driveFilter = new SlewRateLimiter(3);
@@ -63,8 +64,8 @@ public class RobotContainer {
                 () -> robotCentric.getAsBoolean()
             )
         );
-        // arm.setDefaultCommand(angleCommand);
-        intake.setDefaultCommand(in);
+        //arm.setDefaultCommand(angleCommand);
+        //intake.setDefaultCommand(in);
         //camera
         UsbCamera camera = CameraServer.startAutomaticCapture();
         camera.setResolution(320, 240);
@@ -79,16 +80,16 @@ public class RobotContainer {
     private void configureButtonBindings() {
         /* Driver Buttons */
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
-        new Trigger(()->driver.getAButtonPressed()).onTrue(Commands.runOnce(
-            ()->arm.setArmToAmp(), arm));
-        new Trigger(()->driver.getRightBumperPressed()).onTrue(Commands.runOnce(
-            ()->arm.setArmToIntake(), arm));
-        new Trigger(()->driver.getRightBumperReleased() && driver.getYButtonReleased()  && driver.getXButtonReleased() && driver.getAButtonReleased()).onTrue(Commands.runOnce(
-            ()->arm.setArmTo45(), arm));
-        new Trigger(()->driver.getYButtonPressed()).onTrue(Commands.runOnce(
-            ()->arm.setArmToLimelightTrack(), arm));
-        new Trigger(()->driver.getXButtonPressed()).onTrue(Commands.runOnce(
-            ()->arm.setArmToClimb(), arm));
+        // new Trigger(()->driver.getAButtonPressed()).onTrue(Commands.runOnce(
+        //     ()->arm.setArmToAmp(), arm));
+        // new Trigger(()->driver.getRightBumperPressed()).onTrue(Commands.runOnce(
+        //     ()->arm.setArmToIntake(), arm));
+        // new Trigger(()->driver.getRightBumperReleased() && driver.getYButtonReleased()  && driver.getXButtonReleased() && driver.getAButtonReleased()).onTrue(Commands.runOnce(
+        //     ()->arm.setArmTo45(), arm));
+        // new Trigger(()->driver.getYButtonPressed()).onTrue(Commands.runOnce(
+        //     ()->arm.setArmToLimelightTrack(), arm));
+        // new Trigger(()->driver.getXButtonPressed()).onTrue(Commands.runOnce(
+        //     ()->arm.setArmToClimb(), arm));
     }
 
     /**
@@ -96,15 +97,15 @@ public class RobotContainer {
      *
      * @return the command to run in autonomous
      */
-    public Command getAutonomousCommand() {
+    // public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        return new SequentialCommandGroup(
-        new AutoAim(arm), 
-        new AutoShoot(intake), 
-        new AutoDown(arm),
-        new ParallelCommandGroup(new exampleAuto(s_Swerve), new IntakeOn(intake)), 
-        //new DriveBack(s_Swerve),
-        new AutoAim(arm), 
-        new AutoShoot(intake));
+        // return new SequentialCommandGroup(
+        // new AutoAim(arm), 
+        // new AutoShoot(intake), 
+        // new AutoDown(arm),
+        // new ParallelCommandGroup(new exampleAuto(s_Swerve), new IntakeOn(intake)), 
+        // //new DriveBack(s_Swerve),
+        // new AutoAim(arm), 
+        // new AutoShoot(intake));
     }
-}
+
